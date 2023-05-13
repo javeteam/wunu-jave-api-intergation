@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:data="clr-namespace:NBUStat.Data;assembly=NBUStat"
+             xmlns:viewModel="clr-namespace:NBUStat.ViewModel;assembly=NBUStat"
+             x:Class="NBUStat.View.MainPage"
+             x:DataType="viewModel:MainPageViewModel">
+
+    <CollectionView
+        ItemsSource="{Binding CurrencyRates}">
+        <CollectionView.EmptyView>
+            <StackLayout>
+                <Label
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding ErrorMessage}" /> 
+            </StackLayout>
+        </CollectionView.EmptyView>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="data:CurrencyRate">
+                <Grid 
+                    Padding="14,0"
+                    BackgroundColor="White">
+                    <Grid 
+                        BackgroundColor="LightGray" 
+                        ColumnSpacing="1"
+                        Padding="1">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text ="{Binding Name}" HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Start" Padding="5,7,5,7"></Label>
+                        <Label Grid.Column="1" Text ="{Binding IsoCode}" HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Center" Padding="0,7,0,7"></Label>
+                        <Label Grid.Column="2" Text ="{Binding Code}" HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Center" Padding="0,7,0,7"></Label>
+                        <Label Grid.Column="3" Text ="{Binding ExchangeRate}" HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Center" Padding="0,7,0,7"></Label>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
